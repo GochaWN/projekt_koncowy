@@ -1,0 +1,24 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: lightblue;
+}
+
+.container {
+    text-align: center;
+}
+
+h1 {
+    font-size: 4em;
+}
+
+p {font-size: 1.3em;
+}
+
+ul {
+    font-size: 1.2em;
+}

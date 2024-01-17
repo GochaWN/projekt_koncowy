@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style2.css') }}">
+</head>
+<body>
+<div class="container">
+    <h1>Results for {{state}} state</h1>
+    <p>1. Average annual salary for developers in {{state}} state: ${{ "%.2f"|format(average_salary) }}</p>
+
+    <p>2. Top 3 cities with the highest salaries:</p>
+    <ul>
+        {% for city in top_cities %}
+            <li>{{ city }}</li>
+        {% endfor %}
+    </ul>
+
+    <p>3. Salary percentages above the state average:</p>
+    <ul>
+        {% for city, percentage in city_percentages %}
+        <li>{{ city }}: {{ "%.2f"|format(percentage) }}%</li>
+        {% endfor %}
+    </ul>
+
+    <p>4. City with the highest salaries in the {{state}} state is {{ recommended_city }}.</p>
+    <ul>
+          Average annual salary in {{ recommended_city }} is ${{ "%.2f"|format(recommended_city_salary) }}
+    </ul>
+</div>
+</body>
+</html>
