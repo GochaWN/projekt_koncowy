@@ -4,6 +4,9 @@ import pandas as pd
 import os
 from flask_migrate import Migrate
 import kaggle
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///project2.db"
@@ -21,22 +24,18 @@ class Salary(db.Model):
 with app.app_context():
     db.create_all()
 
-dataset_name = 'thedevastator/u-s-software-developer-salaries'
-
-local_directory = os.getcwd()
-
-os.makedirs(local_directory, exist_ok=True)
-
+local_directory = os.environ.get('LOCAL_DIRECTORY', os.getcwd())
 zip_file_path = os.path.join(local_directory, 'developer_salaries.zip')
 csv_file_path = os.path.join(local_directory, 'SofwareDeveloperIncomeExpensesperUSACity.csv')
-
 
 kaggle_config_dir = os.environ.get('KAGGLE_CONFIG_DIR', '.kaggle')
 os.environ['KAGGLE_CONFIG_DIR'] = kaggle_config_dir
 
-os.environ['KAGGLE_USERNAME'] = 'wilczynskanunez'
-os.environ['KAGGLE_KEY'] = '131c1d554553de90dd1663047c96750a'
+os.environ['KAGGLE_USERNAME'] = os.environ.get('KAGGLE_USERNAME')
+os.environ['KAGGLE_KEY'] = os.environ.get('KAGGLE_KEY')
 
+
+dataset_name = 'thedevastator/u-s-software-developer-salaries'
 
 kaggle.api.authenticate()
 try:
